@@ -1,12 +1,11 @@
 import Avatar from "react-avatar";
 import account from "../assets/account.png";
-import question from "../assets/question.png";
-import pen from "../assets/pen.png";
-import edit from "../assets/edit.png";
-import comment from "../assets/comment.png";
 import { auth, storage } from "../firebase/setup";
+import pen from "../assets/pen.png";
+// import paper from "../assets/paper.jpg"
 import { addDoc, collection, doc, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import comment from "../assets/comment.png";
 import { Link } from "react-router-dom";
 import PostPopup from "./PostPopup";
 
@@ -36,11 +35,7 @@ const Rightbar = (props: searchProp) => {
     }
   };
 
-  const answerDoc = doc(
-    storage,
-    "questions",
-    `${questionId ? questionId : Math.random()}`
-  );
+  const answerDoc = doc(storage, "questions", `${questionId ? questionId : Math.random()}`);
   const answerRef = collection(answerDoc, "answers");
 
   const addAnswer = async () => {
@@ -59,125 +54,86 @@ const Rightbar = (props: searchProp) => {
   }, [questionData]);
 
   return (
-    <div className="p-4 bg-gray-100 rounded-lg shadow-lg">
-      {/* Ask Section */}
-      <div className="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-        <div className="flex items-center">
+    <div className="p-4 rounded-sm bg-gray-100">
+      <div className="bg-blue-100 p-2 h-20 border border-spacing-1 rounded-lg shadow-md">
+        <div className="flex">
           {auth?.currentUser?.emailVerified ? (
-            <Avatar
-              round
-              size="35"
-              className="cursor-pointer"
-              name={auth?.currentUser?.email ?? account}
-            />
+            <Avatar round size="25" className="mt-0.5 ml-1 cursor-pointer" name={auth?.currentUser?.email ?? account} />
           ) : (
-            <Avatar
-              round
-              size="35"
-              className="cursor-pointer"
-              src={account}
-            />
+            <Avatar round size="25" className="mt-0.5 ml-1 cursor-pointer" src={account} />
           )}
           <input
             onClick={() => setPost(true)}
             placeholder="What do you want to ask or share?"
-            className="bg-gray-50 border border-gray-300 rounded-full w-full ml-4 px-4 py-2 placeholder-gray-600 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            className="bg-gray-200 text-gray-700 p-1 ml-4 placeholder-gray-500 border border-spacing-1 rounded-full w-full cursor-pointer"
           />
         </div>
-        <div className="flex justify-around mt-4 text-sm text-gray-600">
-          <div
-            onClick={() => setPost(true)}
-            className="flex items-center cursor-pointer hover:text-blue-500"
-          >
-            <img src={question} alt="Ask" className="w-5 h-5" />
-            <h1 className="ml-2">Ask</h1>
-          </div>
-          <h1>|</h1>
-          <div className="flex items-center hover:text-blue-500">
-            <img src={edit} alt="Answer" className="w-5 h-5" />
-            <h1 className="ml-2">Answer</h1>
-          </div>
-          <h1>|</h1>
-          <div
-            onClick={() => setPost(true)}
-            className="flex items-center cursor-pointer hover:text-blue-500"
-          >
-            <img src={pen} alt="Post" className="w-5 h-5" />
-            <h1 className="ml-2">Post</h1>
+        <div className="flex pt-2">
+          <h1 className="ml-16">|</h1>
+          <div onClick={() => setPost(true)} className="ml-16 flex cursor-pointer">
+            <img src={pen} className="w-5 h-5" />
+            <h1 className="ml-2 text-sm">Post</h1>
           </div>
         </div>
       </div>
 
-      {/* Display Questions */}
       {questionData
-        .filter((data: any) =>
-          props?.search
-            ? data?.question.includes(props?.search)
-            : data?.question?.includes(props?.menu)
-        )
+        .filter((data: any) => (props?.search ? data?.question.includes(props?.search) : data?.question?.includes(props?.menu)))
         .map((data: any) => {
           return (
-            <div
-              key={data.id}
-              className="bg-white mt-4 p-4 rounded-lg shadow-md border border-gray-200"
-            >
-              <div className="flex items-center">
-                <Avatar
-                  round
-                  size="35"
-                  className="cursor-pointer"
-                  name={data?.email ?? account}
-                />
-                <h1 className="ml-3 font-medium text-gray-700">
-                  {data?.email?.substring(0, data.email.indexOf("@"))}
-                </h1>
-              </div>
-              <h1 className="mt-4 ml-2 font-semibold text-gray-800">
-                {data?.question}?
-              </h1>
-              <hr className="mt-3" />
-              <div className="flex items-center mt-3 text-sm text-blue-600">
-                <img
-                  src={comment}
-                  alt="Comment"
-                  onClick={() => {
-                    setQuestionId(data?.id);
-                    setCommentToggle(true);
-                  }}
-                  className="w-5 h-5 cursor-pointer ml-3"
-                />
-                <Link to="/answers" state={{ id: data?.id }}>
-                  <button className="border border-blue-400 text-blue-600 px-4 py-1 rounded-full ml-3 hover:bg-blue-100">
-                    Answers
-                  </button>
-                </Link>
-              </div>
-              {commentToggle && (
-                <div className="flex items-center mt-4">
-                  <Avatar
-                    round
-                    size="35"
-                    className="cursor-pointer"
-                    name={auth?.currentUser?.email ?? account}
-                  />
-                  <input
-                    onChange={(e) => setAnswers(e.target.value)}
-                    placeholder="Add a comment"
-                    className="bg-gray-50 border border-gray-300 rounded-full w-full ml-4 px-4 py-2 placeholder-gray-600 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                  />
-                  <button
-                    onClick={() => {
-                      addAnswer();
-                      setCommentToggle(false);
-                    }}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-full ml-3 hover:bg-blue-600"
-                  >
-                    Add comment
-                  </button>
+            <>
+              <div className="bg-white mt-2 p-2 rounded-lg shadow-md border-t-2 border-blue-300">
+                <div className="flex">
+                  {auth?.currentUser?.emailVerified ? (
+                    <Avatar round size="25" className="mt-0.5 ml-1 cursor-pointer" name={data?.email ?? account} />
+                  ) : (
+                    <Avatar round size="25" className="mt-0.5 ml-1 cursor-pointer" src={account} />
+                  )}
+                  <h1 className="ml-3 font-semibold">{data?.email.substring(0, data.email.indexOf("@"))}</h1>
                 </div>
-              )}
-              <hr className="mt-4" />
-            </div>
+                <h1 className="mt-4 ml-2 font-bold text-gray-800">{data?.question}?</h1>
+                <hr className="mt-3 border-gray-300" />
+                <div className="flex">
+                  <img
+                    src={comment}
+                    onClick={() => {
+                      setQuestionId(data?.id);
+                      setCommentToggle(true);
+                    }}
+                    className="w-5 h-5 mt-3 cursor-pointer ml-3"
+                  />
+                  <Link to="/answers" state={{ id: data?.id }}>
+                    <button className="bg-blue-500 text-white rounded-full p-2 mt-2 ml-3">Answers</button>
+                  </Link>
+                </div>
+                {commentToggle && (
+                  <div className="flex mt-3">
+                    {auth?.currentUser?.emailVerified ? (
+                      <Avatar round size="35" className="mt-0.5 ml-1 cursor-pointer" name={auth?.currentUser?.email ?? account} />
+                    ) : (
+                      <Avatar round size="25" className="mt-0.5 ml-1 cursor-pointer" src={account} />
+                    )}
+                    <input
+                      onChange={(e) => setAnswers(e.target.value)}
+                      placeholder="Add a comment"
+                      className="bg-gray-200 text-gray-700 p-1 ml-4 placeholder-gray-500 border border-spacing-1 rounded-full w-full h-10"
+                    />
+                    <Link to="/answers" state={{ id: data?.id }}>
+                      <button
+                        onClick={() => {
+                          addAnswer();
+                          setCommentToggle(false);
+                        }}
+                        className="bg-blue-500 text-white rounded-full p-2 w-60 ml-3"
+                      >
+                        Add comment
+                      </button>
+                    </Link>
+                  </div>
+                )}
+                <hr className="mt-4 border-gray-300" />
+              </div>
+            </>
           );
         })}
       {post && <PostPopup setPost={setPost} />}
