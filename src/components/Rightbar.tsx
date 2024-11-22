@@ -1,7 +1,7 @@
 import Avatar from "react-avatar";
 import account from "../assets/account.png";
 import { auth, storage } from "../firebase/setup";
-import pen from "../assets/pen.png";
+// import pen from "../assets/pen.png";
 // import paper from "../assets/paper.jpg"
 import { addDoc, collection, doc, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
@@ -67,13 +67,6 @@ const Rightbar = (props: searchProp) => {
             placeholder="What do you want to ask or share?"
             className="bg-gray-200 text-gray-700 p-1 ml-4 placeholder-gray-500 border border-spacing-1 rounded-full w-full cursor-pointer"
           />
-        </div>
-        <div className="flex pt-2">
-          <h1 className="ml-16">|</h1>
-          <div onClick={() => setPost(true)} className="ml-16 flex cursor-pointer">
-            <img src={pen} className="w-5 h-5" />
-            <h1 className="ml-2 text-sm">Post</h1>
-          </div>
         </div>
       </div>
 
