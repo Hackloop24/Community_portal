@@ -96,7 +96,7 @@ const Rightbar = (props: searchProp) => {
                     className="w-5 h-5 mt-3 cursor-pointer ml-3"
                   />
                   <Link to="/answers" state={{ id: data?.id }}>
-                    <button className="bg-blue-500 text-white rounded-full p-2 mt-2 ml-3">Answers</button>
+                    <button className="bg-blue-500 text-white rounded-full p-2 mt-2 ml-3">View Comments</button>
                   </Link>
                 </div>
                 {commentToggle && (
