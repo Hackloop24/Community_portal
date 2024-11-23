@@ -55,7 +55,7 @@ const Rightbar = (props: searchProp) => {
 
   return (
     <div className="p-4 rounded-sm bg-gray-100">
-      <div className="bg-blue-100 p-2 h-20 border border-spacing-1 rounded-lg shadow-md">
+      <div className="bg-blue-300 p-2 h-20 border border-spacing-1 rounded-lg shadow-md">
         <div className="flex">
           {auth?.currentUser?.emailVerified ? (
             <Avatar round size="25" className="mt-0.5 ml-1 cursor-pointer" name={auth?.currentUser?.email ?? account} />
@@ -65,7 +65,7 @@ const Rightbar = (props: searchProp) => {
           <input
             onClick={() => setPost(true)}
             placeholder="What do you want to ask or share?"
-            className="bg-gray-200 text-gray-700 p-1 ml-4 placeholder-gray-500 border border-spacing-1 rounded-full w-full cursor-pointer"
+            className="bg-white text-gray-700 p-2 ml-4 placeholder-gray-500 border border-spacing-1 rounded-full w-full cursor-pointer"
           />
         </div>
       </div>

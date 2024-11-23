@@ -12,13 +12,10 @@ const PostPopup = (props: postType) => {
 
   const addQuestion = async () => {
     try {
-     
       await addDoc(questionRef, {
         question: quest,
         email: auth?.currentUser?.email,
       });
-
-      
       props?.setPost(false);
     } catch (error) {
       console.error("Error adding question: ", error);
@@ -40,12 +37,16 @@ const PostPopup = (props: postType) => {
                 >
                   X
                 </h1>
-                <input
+                
+                {/* Use textarea instead of input */}
+                <textarea
                   onChange={(e) => setQuest(e.target.value)}
+                  value={quest}
                   placeholder="Start your question with Why, What, How, etc."
-                  className="w-full outline-none h-30 border p-2 rounded-md text-black"
+                  className="w-full outline-none h-30 border p-2 rounded-md text-black resize-none"
+                  rows={4} // Adjust number of rows (lines) based on preference
                 />
-               
+                
                 <button
                   onClick={addQuestion}
                   className="bg-blue-500 text-white rounded-full p-2 w-40 ml-auto mt-3 block"
