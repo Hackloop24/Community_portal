@@ -13,52 +13,43 @@ const Navbar = (props: SearchProp) => {
   const [post, setPost] = useState(false);
 
   return (
-    <nav className="flex items-center justify-between px-8 py-3 bg-gray-800 shadow-md w-full h-16 text-gray-200">
-      {/* Left Section: Logo */}
+    <nav className="flex items-center justify-between px-6 py-3 bg-gray-800 shadow-md w-full h-16 text-gray-200">
+      {/* Left Section: Logo and Title */}
       <div className="flex items-center gap-4">
         <img
           src={community}
           alt="Community Logo"
           className="w-12 h-12 rounded-full border border-gray-300"
         />
-        <h1 className="text-3xl font-extrabold text-blue-500 tracking-wide">
-          GovAlert
+        <h1 className="text-2xl font-extrabold text-blue-500 tracking-wide">
+          GovAlert Community
         </h1>
       </div>
 
-      
-      <div className="flex items-center gap-8">
-  
+      {/* Middle Section: Links and Search Bar */}
+      <div className="flex items-center justify-evenly w-2/3">
+        {/* Navigation Links */}
         <div className="flex gap-6">
-          <Link
-            to="/home"
+          <a
+            href="/Main"
             className="flex items-center space-x-1 text-gray-300 hover:text-blue-400"
           >
-            <i className="fa fa-home"></i><span>Home</span>
-          </Link>
+            <i className="fa fa-home"></i>
+            <span>Home</span>
+          </a>
           <Link
             to="/report"
             className="flex items-center space-x-1 text-gray-300 hover:text-blue-400"
           >
-            <i className="fa fa-flag"></i><span>Report</span>
+            <i className="fa fa-flag"></i>
+            <span>Report</span>
           </Link>
-          <a
-            href="#phone"
-            className="flex items-center space-x-1 text-gray-300 hover:text-blue-400"
-          >
-            <i className="fa fa-phone"></i><span>Contact</span>
-          </a>
-          <a
-            href="#help"
-            className="flex items-center space-x-1 text-gray-300 hover:text-blue-400"
-          >
-            <i className="fa fa-question-circle"></i><span>Help</span>
-          </a>
           <Link
             to="/about"
             className="flex items-center space-x-1 text-gray-300 hover:text-blue-400"
           >
-            <i className="fa fa-info-circle"></i><span>About Us</span>
+            <i className="fa fa-info-circle"></i>
+            <span>About Us</span>
           </Link>
         </div>
 
@@ -76,12 +67,7 @@ const Navbar = (props: SearchProp) => {
 
       {/* Right Section: Avatar and Add Question Button */}
       <div className="flex items-center gap-4">
-        <Avatar
-          round
-          size="30"
-          name="Your Name"
-          className="cursor-pointer"
-        />
+        <Avatar round size="30" name="Your Name" className="cursor-pointer" />
         <button
           onClick={() => setPost(true)}
           className="bg-blue-500 text-white rounded-full px-4 py-2 text-sm hover:bg-blue-600 transition-colors"
