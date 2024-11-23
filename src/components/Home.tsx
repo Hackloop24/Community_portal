@@ -1,25 +1,27 @@
-import { useState } from "react"
-import Leftbar from "./Leftbar"
-import Rightbar from "./Rightbar"
+import { useState } from "react";
+import Leftbar from "./Leftbar";
+import Rightbar from "./Rightbar";
 
-type seachProp = {
-  search:any
-}
+type SearchProp = {
+  search: any;
+};
 
-const Home = (props:seachProp) => {
-
-  const [menu,setMenu] = useState("")
+const Home = (props: SearchProp) => {
+  const [menu, setMenu] = useState("");
 
   return (
-    <div className="h-full w-screen bg-gray-100 grid grid-cols-6">
-        <div>
-        <Leftbar setMenu={setMenu}/>
-        </div>
-        <div className="col-span-3">
-        <Rightbar search={props?.search} menu={menu}/>
-        </div>
-    </div>
-  )
-}
+    <div className="min-h-screen w-screen bg-gray-700 text-black grid grid-cols-6">
+      {/* Left Sidebar */}
+      <div className="bg-gray-700 shadow-md">
+        <Leftbar setMenu={setMenu} />
+      </div>
 
-export default Home
+      {/* Main Content */}
+      <div className="col-span-4 bg-gray-700 shadow-lg rounded-lg p-6 m-4">
+        <Rightbar search={props?.search} menu={menu} />
+      </div>
+    </div>
+  );
+};
+
+export default Home;

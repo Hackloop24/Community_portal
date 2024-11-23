@@ -96,7 +96,7 @@ const Rightbar = (props: searchProp) => {
                     className="w-5 h-5 mt-3 cursor-pointer ml-3"
                   />
                   <Link to="/answers" state={{ id: data?.id }}>
-                    <button className="bg-blue-500 text-white rounded-full p-2 mt-2 ml-3">View Comments</button>
+                    <button className="bg-blue-500  hover:bg-blue-600 text-white rounded-full p-2 mt-2 ml-3">View Comments</button>
                   </Link>
                 </div>
                 {commentToggle && (
@@ -109,7 +109,7 @@ const Rightbar = (props: searchProp) => {
                     <input
                       onChange={(e) => setAnswers(e.target.value)}
                       placeholder="Add a comment"
-                      className="bg-gray-200 text-gray-700 p-1 ml-4 placeholder-gray-500 border border-spacing-1 rounded-full w-full h-10"
+                      className="bg-gray-200 text-gray-700 p-1 ml-4  placeholder-gray-500 border border-spacing-1 rounded-full w-full h-10"
                     />
                     <Link to="/answers" state={{ id: data?.id }}>
                       <button
@@ -117,7 +117,7 @@ const Rightbar = (props: searchProp) => {
                           addAnswer();
                           setCommentToggle(false);
                         }}
-                        className="bg-blue-500 text-white rounded-full p-2 w-60 ml-3"
+                        className="bg-blue-500 text-white rounded-full p-2 w-60 ml-3 hover:bg-blue-600"
                       >
                         Add comment
                       </button>

@@ -1,4 +1,4 @@
-//import home from "../assets/home.png";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import community from "../assets/community.jpeg";
 import lens from "../assets/search.png";
 import Avatar from "react-avatar";
@@ -21,27 +21,27 @@ const Navbar = (props: SearchProp) => {
           alt="Community Logo"
           className="w-12 h-12 rounded-full border border-gray-300"
         />
-        <h1 className="text-3xl font-extrabold text-blue-400 tracking-wide">
+        <h1 className="text-3xl font-extrabold text-blue-500 tracking-wide">
           GovAlert
         </h1>
       </div>
 
-      {/* Center Section: Navigation Links and Search */}
+      
       <div className="flex items-center gap-8">
-        {/* Navigation Links */}
+  
         <div className="flex gap-6">
-          <a
-            href="/Home"
+          <Link
+            to="/home"
             className="flex items-center space-x-1 text-gray-300 hover:text-blue-400"
           >
             <i className="fa fa-home"></i><span>Home</span>
-          </a>
-          <a
-            href="/report"
+          </Link>
+          <Link
+            to="/report"
             className="flex items-center space-x-1 text-gray-300 hover:text-blue-400"
           >
             <i className="fa fa-flag"></i><span>Report</span>
-          </a>
+          </Link>
           <a
             href="#phone"
             className="flex items-center space-x-1 text-gray-300 hover:text-blue-400"
@@ -54,12 +54,12 @@ const Navbar = (props: SearchProp) => {
           >
             <i className="fa fa-question-circle"></i><span>Help</span>
           </a>
-          <a
-            href="#about"
+          <Link
+            to="/about"
             className="flex items-center space-x-1 text-gray-300 hover:text-blue-400"
           >
             <i className="fa fa-info-circle"></i><span>About Us</span>
-          </a>
+          </Link>
         </div>
 
         {/* Search Bar */}
