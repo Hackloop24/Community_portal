@@ -2,7 +2,6 @@ import { initializeApp } from "firebase/app";
 import {getAuth,GoogleAuthProvider} from "firebase/auth"
 import {getFirestore} from "firebase/firestore"
 
-
 const firebaseConfig = {
   apiKey: "AIzaSyBzvP2Ob1fFJPLJw5TBcA-deC87uZccq4I",
   authDomain: "quora-clone-155a1.firebaseapp.com",

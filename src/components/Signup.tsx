@@ -18,13 +18,15 @@ const Signup = () => {
   // Google Sign-In Handler
   const googleSignin = async () => {
     try {
-      await signInWithPopup(auth, googleProvider);
-      toast.success("Logged in successfully");
-      setTimeout(() => {
-        if (auth?.currentUser) navigate("/main");
-      }, 2000);
+      const result = await signInWithPopup(auth, googleProvider);
+      if (result.user) {
+        toast.success("Logged in successfully");
+        setTimeout(() => {
+          navigate("/main");  // Navigate to main page after successful login
+        }, 2000);
+      }
     } catch (err) {
-      console.error(err);
+      console.error("Google sign-in error: ", err);
       toast.error("Error signing in with Google");
     }
   };
@@ -35,6 +37,7 @@ const Signup = () => {
       toast.error("Email and password are required.");
       return;
     }
+
     try {
       const data = await signInWithEmailAndPassword(auth, email, password);
       if (data?.user?.emailVerified) {
@@ -44,7 +47,7 @@ const Signup = () => {
         toast.error("Email not verified. Please verify your email.");
       }
     } catch (err: any) {
-      console.error(err);
+      console.error("Email/password login error: ", err);
       if (err.code === "auth/user-not-found") {
         toast.error("No account found with this email.");
       } else if (err.code === "auth/wrong-password") {
@@ -65,7 +68,7 @@ const Signup = () => {
       await sendPasswordResetEmail(auth, email);
       toast.success("Password reset email sent. Check your inbox.");
     } catch (err: any) {
-      console.error(err);
+      console.error("Password reset error: ", err);
       if (err.code === "auth/user-not-found") {
         toast.error("No account found with this email.");
       } else if (err.code === "auth/invalid-email") {
